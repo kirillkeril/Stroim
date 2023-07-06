@@ -1,0 +1,14 @@
+@import "./variables";
+@import "https://necolas.github.io/normalize.css/8.0.1/normalize.css";
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: Mulish, sans-serif;
+}
+a {
+  text-decoration: none;
+}
+
+div img {
+  width: 100%;
+}
