@@ -28,6 +28,7 @@ async function getWater() {
   if (res) {
     waterSensor.value.isFlooded = res.isFlooded;
     waterSensor.value.value = res.value;
+    if(res.isFlooded) await DefenceServices.sendMessage(authStore.user.token, '105', `${authStore.user.apartment[0].custom_title} Залив!!!`);
   }
 }
 function DefenceOn() {

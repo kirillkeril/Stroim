@@ -1,4 +1,5 @@
 import {httpClient} from "@/services/http/httpClient.ts";
+import axios from "axios";
 
 class DefenceServices {
     async setLampState(state: 1 | 0, token: string) {
@@ -24,6 +25,14 @@ class DefenceServices {
             }
         });
         return response.data;
+    }
+    async sendMessage(token: string, channelKey: string, text: string) {
+        const res = await axios.post('https://im-uae-test.ujin.tech/sendMessage', {
+            channelKey: channelKey,
+            text: text,
+            token: token
+        });
+        return res.data;
     }
 }
 export default new DefenceServices();
