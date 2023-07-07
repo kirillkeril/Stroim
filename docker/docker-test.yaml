@@ -1,0 +1,63 @@
+version: "3.7"
+services:
+
+ mariadb-primary:
+  container_name: "mariadb-primary"
+  image: bitnami/mariadb:latest
+  environment:
+   - MARIADB_ROOT_PASSWORD=q20HG96avsBG
+   - MARIADB_DATABASE=cont
+   - MARIADB_USER=user
+   - MARIADB_PASSWORD=const
+   - MARIADB_REPLICATION_MODE=master
+   - MARIADB_REPLICATION_USER=replication_user
+   - MARIADB_REPLICATION_PASSWORD=fnslave
+  ports:
+   - 0.0.0.0:3306:3306
+  networks:
+   - custom
+
+ mariadb-replica-1:
+  container_name: 'mariadb-replica-1'
+  image: bitnami/mariadb:latest
+  environment:
+   - MARIADB_MASTER_ROOT_PASSWORD=q20HG96avsBG
+   - MARIADB_REPLICATION_MODE=slave
+   - MARIADB_REPLICATION_USER=replication_user
+   - MARIADB_REPLICATION_PASSWORD=fnslave
+   - MARIADB_MASTER_HOST=mariadb-primary
+  ports:
+   - 0.0.0.0:3307:3306
+  depends_on:
+   - mariadb-primary
+  networks:
+   - custom
+
+ mariadb-replica-2:
+  container_name: 'mariadb-replica-2'
+  image: bitnami/mariadb:latest
+  environment:
+   - MARIADB_MASTER_ROOT_PASSWORD=q20HG96avsBG
+   - MARIADB_REPLICATION_MODE=slave
+   - MARIADB_REPLICATION_USER=replication_user
+   - MARIADB_REPLICATION_PASSWORD=fnslave
+   - MARIADB_MASTER_HOST=mariadb-primary
+  ports:
+   - 0.0.0.0:3308:3306
+  depends_on:
+   - mariadb-primary
+  networks:
+   - custom
+
+# maxscale:
+#  container_name: 'maxscale'
+#  image: mariadb/maxscale:latest
+#  volumes:
+#   - ~/maxscale.cnf:/etc/maxscale.cnf
+#  depends_on:
+#    - mariadb-replica-1
+#    - mariadb-replica-2
+ 
+networks:
+  custom:
+    driver: bridge
