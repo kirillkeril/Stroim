@@ -8,6 +8,8 @@ export enum RouterNames {
     MARKET = 'market',
     AUTH = 'auth',
     NOT_FOUND = 'notFound',
+    CONTACTS = 'contacts',
+    DEFENCE = 'defence',
 }
 
 const routes: Array<RouteRecordRaw> = [
@@ -44,6 +46,19 @@ const routes: Array<RouteRecordRaw> = [
         path:"/profile",
         name: RouterNames.PROFILE,
         component: () => import('@/pages/ProfilePage.vue'),
+        meta: {
+            requireAuth: true,
+        }
+    },
+    {
+        path:"/contacts",
+        name: RouterNames.CONTACTS,
+        component: () => import('@/pages/ContactsPage.vue')
+    },
+    {
+        path:"/defence",
+        name: RouterNames.DEFENCE,
+        component: () => import('@/pages/DefencePage.vue'),
         meta: {
             requireAuth: true,
         }

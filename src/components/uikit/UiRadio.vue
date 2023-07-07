@@ -2,27 +2,31 @@
 interface Props {
   type: "column" | "line";
   name: string;
+  modelValue?: string; 
   values: Array<{
     id: number;
     value: string;
     label: string;
   }>;
 }
-import {ref} from "vue";
-const {name, values, type} = withDefaults(defineProps<Props>(), {type: "line"});
+import {computed, ref} from "vue";
+let {name, values, modelValue, type} = withDefaults(defineProps<Props>(), {type: "line"});
 const model = ref('');
-const emit = defineEmits(['update:value']);
+const emit = defineEmits(['update:modelValue']);
 
 function onChange(event) {
   console.log(model.value, event.target.value, values)
-  emit('update:value', event.target.value);
+  emit('update:modelValue', event.target.value);
 }
+const isChecked = computed(() => {
+  return modelValue === model.value;
+}) 
 </script>
 
 <template>
   <div class="radio-group" :id="name" :class="{line: type==='line', column: type==='column'}">
     <label v-for="value in values" :for="`ui-radio-${value.id}`" :key="value.id">
-      <input :id="`ui-radio-${value.id}`" type="radio" v-model="model" :value="value.value" @change="onChange" :name="name"/>
+      <input :id="`ui-radio-${value.id}`" :checked="isChecked" type="radio" v-model="model" :value="value.value" @change="onChange" :name="name"/>
       <span class="mark">
         <span class="checked"></span>
       </span>

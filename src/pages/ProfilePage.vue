@@ -3,6 +3,13 @@
 import ProfileCard from "@/components/ProfileCard.vue";
 import ProductsGrid from "@/components/ProductsGrid.vue";
 import AddProductCard from "@/components/AddProductCard.vue";
+import {useProductsStore} from "@/store/productsStore.ts";
+import {computed} from "vue";
+import {useAuthStore} from "@/store/authStore.ts";
+
+const productsStore = useProductsStore();
+const authStore = useAuthStore();
+const usersProducts = computed(() => productsStore.products.filter(p => p.ownerId === authStore.user.token));
 </script>
 
 <template>
@@ -11,7 +18,7 @@ import AddProductCard from "@/components/AddProductCard.vue";
       <ProfileCard/>
     </div>
     <div class="products-side">
-      <ProductsGrid>
+      <ProductsGrid :products="usersProducts">
         <template #addCard>
           <add-product-card />
         </template>

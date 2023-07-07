@@ -1,5 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import UiButton from "@/components/uikit/UiButton.vue";
+import {Product} from "@/types/Products.js";
+
+const {product} = defineProps<{product: Product}>();
 </script>
 
 <template>
@@ -9,12 +12,12 @@ import UiButton from "@/components/uikit/UiButton.vue";
       </div>
     </header>
     <main class="main">
-      <h6 class="title">Название товара</h6>
-      <div class="price">12.000 р.</div>
-      <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, pariatur?</p>
+      <h6 class="title">{{product.title}} <span style="font-size: 12px; color: #d6d6d6">{{product.type}}</span></h6>
+      <div class="price">{{product.price}} р.</div>
+      <p class="description">{{ product.description }}</p>
       <div class="user-data">
-        <span class="user-data-key">Продавец: <span class="user-data-value">Карина Евгения</span></span>
-        <span class="user-data-key">Этаж/квартира: <span class="user-data-value">12/256</span></span>
+        <span class="user-data-key">Продавец: <span class="user-data-value">{{product.ownerName}}</span></span>
+        <span class="user-data-key">Место: <span class="user-data-value">{{product.place}}</span></span>
       </div>
       <footer class="footer">
         <UiButton style="padding-left: 100px; padding-right: 100px;">Позвонить</UiButton>
@@ -83,6 +86,9 @@ import UiButton from "@/components/uikit/UiButton.vue";
   display: flex;
   justify-content: space-between;
   align-items: start;
+  & > *:not(:last-child) {
+    margin-right: 16px;
+  }
 }
 .user-data {
   display: flex;

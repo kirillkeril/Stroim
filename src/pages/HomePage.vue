@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import NewsCard from "@/components/NewsCard.vue";
 import ServiceComponent from "@/components/ServiceComponent.vue";
+import {useAuthStore} from "@/store/authStore.ts";
 
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -13,17 +15,17 @@ import ServiceComponent from "@/components/ServiceComponent.vue";
         <p class="home-page-text">Пользуйтесь сервисами, изучайте последние новости, общайтесь в чатах</p>
       </div>
       <div class="services">
-        <ServiceComponent title="Маркет" text="Магазин товаров и услуг, которые предоставляют жильцы вашего жилого комплекса. Услуги няни, б/у холодильник и т.п." imageName="market"/>
-        <ServiceComponent title="Защита от опасных ситуаций" text="Настройте датчики так, чтобы при возникновении опасной ситуации информация о ней отправлялась в соответствующие органы" imageName="defence"/>
-        <ServiceComponent title="Чаты домов и жилых комплексов" text="Настройте датчики так, чтобы при возникновении опасной ситуации информация о ней отправлялась в соответствующие органы" imageName="messages"/>
+        <ServiceComponent title="Маркет" text="Магазин товаров и услуг, которые предоставляют жильцы вашего жилого комплекса. Услуги няни, б/у холодильник и т.п." imageName="market" serviceName="market"/>
+        <ServiceComponent title="Защита от опасных ситуаций" text="Настройте датчики так, чтобы при возникновении опасной ситуации информация о ней отправлялась в соответствующие органы" imageName="defence" serviceName="defence"/>
+        <ServiceComponent title="Чаты домов и жилых комплексов" text="Настройте датчики так, чтобы при возникновении опасной ситуации информация о ней отправлялась в соответствующие органы" imageName="messages" serviceName="messages"/>
       </div>
     </main>
-    <aside class="news-sidebar">
+    <aside class="news-sidebar" v-if="authStore.isLoggedIn">
       <h2 class="news-title">Новости вашего ЖК</h2>
       <div class="news-list">
-        <NewsCard title="Отключение горячей воды" text="С 1 по 6 августа этого года" imageName="hot-water"/>
+        <NewsCard title="Отключение горячей воды" text="С 1 по 6 августа этого года" imageName="hot-water-small"/>
         <NewsCard title="Газоснабжение" text="Осмотр газового оборудования - 2 августа в 16:00" imageName="gaz"/>
-        <NewsCard title="Отключение горячей воды" text="С 1 по 6 августа этого года" imageName="hot-water"/>
+        <NewsCard title="Отключение горячей воды" text="С 1 по 6 августа этого года" imageName="hot-water-small"/>
         <NewsCard title="Газоснабжение" text="Осмотр газового оборудования - 2 августа в 16:00" imageName="gaz"/>
       </div>
     </aside>
@@ -37,8 +39,6 @@ import ServiceComponent from "@/components/ServiceComponent.vue";
   color: $secondTextColor;
 }
 .page {
-  margin-top: 76px;
-  padding: 0 104px;
   container-type: inline-size;
   display: grid;
   grid-template-columns: auto 398px;

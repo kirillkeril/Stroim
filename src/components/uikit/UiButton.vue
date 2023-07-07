@@ -31,6 +31,6 @@ function onClick(event) {
   button.transparent {
     color: $brandColor;
     border: 1px solid $brandColor;
-    background: white;
+    background: transparent;
   }
 </style>

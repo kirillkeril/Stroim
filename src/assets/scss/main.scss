@@ -16,3 +16,13 @@ a {
 div img {
   width: 100%;
 }
+.page {
+  margin-top: 76px;
+  padding: 0 104px;
+}
+button {
+  transition: 0.3s all;
+}
+button:hover {
+  transform: scale(1.01);
+}

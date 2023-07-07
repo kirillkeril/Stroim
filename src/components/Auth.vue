@@ -5,11 +5,17 @@ import UiButton from "@/components/uikit/UiButton.vue";
 import AuthService from "@/services/http/authService.ts";
 import {useAuthStore} from "@/store/authStore.ts";
 import {useRouter} from "vue-router";
+import {reactive} from "vue";
+import {UserDto} from "@/dtos/Auth.ts";
 
 const authStore = useAuthStore();
 const router = useRouter();
+const user: UserDto = reactive({
+  login: '',
+  password: '',
+});
 async function login() {
-  const data: LoginResponse | undefined = await AuthService.login();
+  const data: LoginResponse | undefined = await AuthService.login(user);
   if (data) {
     authStore.login(data.data.user_fullname, data.data.user);
   }
@@ -21,8 +27,8 @@ async function login() {
   <div class="auth-container">
     <h1>Авторизация</h1>
     <form class="auth-form" @submit.prevent="() => login()">
-      <UiInput class="auth-login" placeholder="login" type="text" />
-      <UiInput class="auth-password"  placeholder="password" type="password" />
+      <UiInput class="auth-login" placeholder="login" type="text" v-model="user.login"/>
+      <UiInput class="auth-password"  placeholder="password" type="password" v-model="user.password"/>
       <UiButton class ="auth-button">Войти</UiButton>
     </form>
   </div>

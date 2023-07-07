@@ -1,18 +1,17 @@
 <script setup lang="ts">
-
 import ProductCard from "@/components/ProductCard.vue";
+import {Product} from "@/types/Products.ts";
 
+const {products} = defineProps<{
+  products: Product[]
+}>();
 </script>
 
 <template>
   <div class="grid-container">
     <div class="products-grid">
       <slot name="addCard"/>
-      <ProductCard/>
-      <ProductCard/>
-      <ProductCard/>
-      <ProductCard/>
-      <ProductCard/>
+      <ProductCard v-for="product in products" :key="product.id" :product="product"/>
     </div>
   </div>
 </template>

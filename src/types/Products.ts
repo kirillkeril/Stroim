@@ -6,6 +6,7 @@ export interface Product {
     type: "service" | "product";
     description: string;
     ownerId: string;
+    ownerName: string;
     place: string;
     imageId: string;
 }

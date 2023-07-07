@@ -10,7 +10,7 @@ import NewsGrid from "@/components/NewsGrid.vue";
 </template>
 
 <style scoped>
-.news-grid {
+.news-page {
   padding: 0 104px;
 }
 </style>

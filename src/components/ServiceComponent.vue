@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import UiButton from "@/components/uikit/UiButton.vue";
+import {useRouter} from "vue-router";
 interface Props {
   title: string;
   text: string;
   imageName: string;
+  serviceName: string;
 }
 
 const props = defineProps<Props>();
+const router = useRouter();
 </script>
 
 <template>
@@ -14,7 +17,7 @@ const props = defineProps<Props>();
     <div class="service-content">
       <h4 class="service-title">{{ props.title }}</h4>
       <p class="service-text">{{props.text}}</p>
-      <UiButton>К сервису</UiButton>
+      <UiButton @click.prevent="router.push({name: serviceName})">К сервису</UiButton>
     </div>
     <div class="service-image">
       <img :src="`/images/services/${props.imageName}-service.png`" :alt="props.imageName" />
@@ -34,6 +37,7 @@ const props = defineProps<Props>();
   flex-direction: column;
   justify-content: flex-start;
   align-items: start;
+  border-radius: 15px;
 }
 .service-content {
   display: flex;

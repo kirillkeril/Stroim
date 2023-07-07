@@ -28,7 +28,7 @@ const props = defineProps<Props>();
   min-height: 447px;
   overflow: hidden;
   padding: 32px;
-
+  border-radius: 15px;
 }
 
 .Extended-News-photo{
