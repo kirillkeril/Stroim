@@ -1,17 +1,10 @@
-export interface RegisterResponse {
-    id: number;
-    username: string;
-    email: string;
-    tokens: {
-        "refresh": string;
-        "access": string;
-    }
-    errors: any[] | undefined;
-}
+import {User} from "@/types/User.ts";
 
 export interface LoginResponse {
-    user: any;
-    refresh: string;
-    access: string
-    errors: any[] | undefined;
+    error: 0 | 1;
+    message: string;
+    data: {
+        user_fullname: string;
+        user: User;
+    }
 }

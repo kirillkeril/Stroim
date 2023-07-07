@@ -16,8 +16,8 @@ function onChange(event) {
 <style lang="scss" scoped>
 input {
   padding: 12px 24px;
-  font-size: 20px;
-  border: 1px solid black;
-  border-radius: 10px ;
+  font-size: 16px;
+  border: 1px solid $brandColor;
+  border-radius: 50px;
 }
 </style>

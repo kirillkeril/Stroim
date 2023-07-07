@@ -6,6 +6,8 @@ import AppLayout from "@/layouts/AppLayout.vue";
   <AppLayout/>
 </template>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+* {
+  font-family: Mulish, sans-serif;
+}
 </style>
